@@ -1,5 +1,8 @@
-import { Button, Flex, Input } from '@fluentui/react-northstar';
+
+import { TextField } from '@material-ui/core';
 import * as React from 'react';
+import { useState } from 'react';
+import ReactDOM from 'react-dom';
 import "./SignupPage.css"
 
 interface ISignupPageProps {
@@ -7,14 +10,15 @@ interface ISignupPageProps {
 }
 export const SignupPageFC: React.FC<ISignupPageProps> = (props: ISignupPageProps): JSX.Element => {
     
-    let [username, setUsername] = React.useState("");
+    let [username, setUsername] = useState("");
+    let [password, setPassword] = useState("");
+    let [confirmPassword, setConfirmPassword] = useState("");
+    let [displayName, setDisplayName] = useState("");
+    let [email, setEmail] = useState("");
+
     return (
-        <Flex className="SignUpContainer" column gap="gap.medium">
-            <Input label="Username" value={username} onChange={ (event, data) => { setUsername(data!.value) }}/>
-            <Input label="Disply Name" />
-            <Input label="Passwrd" />
-            <Input label="Email"/>
-            <Button content="Sign Up "/>
-        </Flex>
+        <form className="singupForm" autoComplete="off">
+            <TextField id="username" label="Username" />
+        </form>
     )
 }   
