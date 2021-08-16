@@ -1,4 +1,5 @@
 import {
+    Button,
   Card,
   CardContent,
   CardHeader,
@@ -9,10 +10,12 @@ import * as React from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import validator from 'validator';
+import { UserRegistrationRequest, UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
+import { RegisterUser } from "../DataLayer/Providers/UserRegistrationProvider";
 import "./SignupPage.css";
 
 interface ISignupPageProps {
-  isSignup: boolean;
+    setIsSignIn: (isSignIn: boolean) => void;
 }
 
 enum validationError {
@@ -20,6 +23,14 @@ enum validationError {
     PASSWORD_MISMATCH="Passwords does not match",
     NOT_AN_EMAIL="Not a valid email address"
 }
+
+enum Status {
+    Running,
+    Failed,
+    Completed,
+    NotStarted
+}
+
 export const SignupPageFC: React.FC<ISignupPageProps> = (
   props: ISignupPageProps
 ): JSX.Element => {
@@ -28,21 +39,40 @@ export const SignupPageFC: React.FC<ISignupPageProps> = (
   let [confirmPassword, setConfirmPassword] = useState("");
   let [displayName, setDisplayName] = useState("");
   let [email, setEmail] = useState("");
+  let [status, setStatus] = useState(Status.NotStarted)
+
+  const onRegister = (): void => {
+    setStatus(Status.Running);
+    const requestBody: UserRegistrationRequest = {username: username, displayName: displayName, password: password, email:email};
+    const requestPromise = RegisterUser(requestBody);
+    requestPromise.then((res: UserResponse) => { console.log(res); setStatus(Status.Completed)}).catch((err)=>{console.log(err); setStatus(Status.Failed)})
+  }
 
   return (
     <Card className="signUpCard">
         <CardHeader title="Sign up as a new user"/>
         <CardContent>
-          <FormControl margin="normal">
-            <TextField error={validateUsername(username)!=null} helperText={validateUsername(username)} id="usernameTextField" label="Username" value={username} onChange={ (event) => {setUsername(event.target.value)}}/>
+          <FormControl margin="normal" style={{width: "60%"}}>
+            {status === Status.Running && "Loading"}
+            {status === Status.Completed && "Finished !"}
+            {status === Status.Failed && "Fuck !"}
+            <TextField className="signUpFields" error={validateUsername(username)!=null} helperText={validateUsername(username)} id="usernameTextField" label="Username" value={username} onChange={ (event) => {setUsername(event.target.value)}}/>
             <TextField id="passwordTextField" label="Password" value={password} onChange={ (event) => {setPassword(event.target.value)}}/>
             <TextField id="confirmPasswordTextField" label="Confirm Password" value={confirmPassword} onChange={(event) => {setConfirmPassword(event.target.value)}}/>
             <TextField id="displayNameTextField" label="Display Name" value={displayName} onChange={(event) => {setDisplayName(event.target.value)}}/>
             <TextField id="emailTextField" error={validateEmail(email)!=null} helperText={validateEmail(email)} label="Email" value={email} onChange={(event) => {setEmail(event.target.value)}}/>
           </FormControl>
         </CardContent>
+        <CardContent>
+        <Button variant="contained" color="primary" onClick={onRegister}>
+            Sign Up
+          </Button>
+        </CardContent>
+        <Button variant="text" color="secondary" onClick={() => {props.setIsSignIn(true)}}>Already have an account? Go to Sign In</Button>
     </Card>
   );
+
+  
 };
 
 function validateUsername(username: string): validationError | null {
