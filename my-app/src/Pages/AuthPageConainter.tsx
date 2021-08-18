@@ -1,11 +1,12 @@
 import { useState } from "react";
 import * as React from "react";
 import { SignupPageFC } from "./SignupPageFC";
+import { SigninPageFC } from "./SigninPageFC";
 export const AuthPageContainer: React.FC<{}> = (): JSX.Element => {
   const [isSignIn, setIsSignIn] = useState(false);
   if (!isSignIn) {
     return <SignupPageFC setIsSignIn={setIsSignIn}/>;
   } else {
-    return <></>;
+    return <SigninPageFC setIsSignIn={setIsSignIn}/>;
   }
 };
