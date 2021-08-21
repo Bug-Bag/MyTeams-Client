@@ -6,15 +6,13 @@ import {
   FormControl,
   TextField,
 } from "@material-ui/core";
-import { Stats } from "fs";
 import * as React from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import validator from 'validator';
 import { UserLoginRequest } from "../DataLayer/DataTransferObject/UserLogin.type";
-import { UserRegistrationRequest, UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
+import { UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
 import { LoginUser } from "../DataLayer/Providers/UserLoginProvider";
-import { RegisterUser } from "../DataLayer/Providers/UserRegistrationProvider";
 import "./SigninPage.css";
 
 interface ISigninPageProps {
@@ -25,7 +23,7 @@ interface ISigninPageProps {
 enum validationError {
     // TODO
     USERNAME_TOO_SHORT="Username too short",
-    INVALID_PASSWORD="Not a valid password. A valid password must have at least 8 characters long, include minumum 1 lower-case character, 1 upper-case character, 1 number anmd 1 symbol."
+    INVALID_PASSWORD  ="Not a valid password. A valid password must have at least 8 characters long, include minumum 1 lower-case character, 1 upper-case character, 1 number anmd 1 symbol."
 }
 
 enum Status {
@@ -41,7 +39,6 @@ export const SigninPageFC: React.FC<ISigninPageProps> = (
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
     let [status, setStatus] = useState(Status.NotStarted);
-    
     const onRegister = (): void => {
         const requestBody: UserLoginRequest = {username: username, password: password};
         const requestPromise = LoginUser(requestBody);
@@ -54,10 +51,9 @@ export const SigninPageFC: React.FC<ISigninPageProps> = (
             <CardHeader title="Sign up as a new user"/>
             <CardContent>
                 <FormControl margin="normal" style={{width: "60%"}}>
-                    {status === Status.NotStarted && "Please sign in using your username and password."}
                     {status === Status.Running && "Loading"}
                     {status === Status.Completed && "Sign in successfully!"}
-                    {status === Status.Failed && "Sign in failed!"}
+                    {status === Status.Failed && "Sign in failed! Please check your username and password."}
                     <TextField className="signUpFields" error={validateUsername(username)!=null} helperText={validateUsername(username)} id="usernameTextField" label="Username" value={username} onChange={ (event) => {setUsername(event.target.value)}}/>
                     <TextField id="passwordTextField" error={validatePassword(password)!=null} helperText={validatePassword(password)} label="Password" value={password} onChange={ (event) => {setPassword(event.target.value)}}/>
                 </FormControl>
