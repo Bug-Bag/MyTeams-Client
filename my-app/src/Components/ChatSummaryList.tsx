@@ -5,6 +5,9 @@ export const ChatSummaryList: React.FC<{}> = (): JSX.Element => {
   return (
     <div className={styles.chatSummaryListContainer}>
       <ChatSummary userDisplayName="me" messageDateTime={new Date()} showTime={true} content="Test Result"/>
+      <ChatSummary userDisplayName="me" messageDateTime={new Date()} showTime={true} content="Test Result"/>
+      <ChatSummary userDisplayName="me" messageDateTime={new Date()} showTime={true} content="Test Result"/>
+      <ChatSummary userDisplayName="me" messageDateTime={new Date()} showTime={true} content="Test Result"/>
     </div>
   );
 };
