@@ -1,31 +1,35 @@
-import React from 'react';
-import {Card, CardContent, Typography} from '@material-ui/core';
-import styles from './ChatSummary.module.sass';
+import React from "react";
+import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
+import styles from "./ChatSummary.module.sass";
 
 interface IProps {
-    userDisplayName: string;
-    messageDateTime: Date;
-    showTime: boolean;
-    content: string;
+  userDisplayName: string;
+  messageDateTime: Date;
+  showTime: boolean;
+  content: string;
 }
 export const ChatSummary: React.FC<IProps> = (props) => {
   return (
-    <Card>
-      <CardContent>
-        <div className={styles.messageHeader}>
-          <Typography color="textSecondary" variant="subtitle2">
-            {props.userDisplayName}
-          </Typography>
-          <Typography color="textSecondary" className={styles.timestamp}>
-            {props.messageDateTime.toLocaleDateString()}
-          </Typography>
-        </div>
-
-        <Typography color="textSecondary">
-          {props.content}
-        </Typography>
-
-      </CardContent>
-    </Card>
+    <ListItem alignItems="flex-start">
+      <ListItemAvatar>
+          <Avatar alt={props.userDisplayName} src="/static/images/avatar/1.jpg" />
+      </ListItemAvatar>
+      <ListItemText
+          primary={props.userDisplayName}
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={styles.summaryText}
+                color="textPrimary"
+              >
+                {props.messageDateTime.toLocaleTimeString()}
+              </Typography>
+              {props.content}
+            </React.Fragment>
+          }
+        />
+    </ListItem>
   );
 };
