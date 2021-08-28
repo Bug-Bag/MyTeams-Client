@@ -2,13 +2,13 @@ import React from "react";
 import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from "@material-ui/core";
 import styles from "./ChatSummary.module.sass";
 
-interface IProps {
+export interface IChatSummaryProps {
   userDisplayName: string;
   messageDateTime: Date;
   showTime: boolean;
   content: string;
 }
-export const ChatSummary: React.FC<IProps> = (props) => {
+export const ChatSummary: React.FC<IChatSummaryProps> = (props) => {
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
@@ -24,7 +24,7 @@ export const ChatSummary: React.FC<IProps> = (props) => {
                 className={styles.summaryText}
                 color="textPrimary"
               >
-                {props.messageDateTime.toLocaleTimeString()}
+                {props.showTime ? props.messageDateTime.toLocaleTimeString() : props.messageDateTime.toLocaleDateString() + ":"}
               </Typography>
               {props.content}
             </React.Fragment>

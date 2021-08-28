@@ -26,6 +26,7 @@
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "craco": "0.0.3",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -50,8 +51,9 @@
     "mini-css-extract-plugin": "0.11.3",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
+    "postcss-cli": "^8.3.1",
     "postcss-flexbugs-fixes": "4.2.1",
-    "postcss-loader": "3.0.0",
+    "postcss-loader": "4.0.3",
     "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "5.0.2",
@@ -78,11 +80,14 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "npm run watch:css && node scripts/start.js",
+    "build": "npm run watch:css && node scripts/build.js",
     "test": "node scripts/test.js",
     "eslint": "eslint --ext .tsx --ext .ts ./",
-    "eslint-fix": "eslint --ext .tsx --ext .ts ./ --fix"
+    "eslint-fix": "eslint --ext .tsx --ext .ts ./ --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/output.css"
   },
   "eslintConfig": {
     "extends": [
@@ -103,15 +108,23 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-controls": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/react": "^6.3.7",
     "@types/validator": "^13.6.3",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
+    "autoprefixer": "^9.8.6",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "node-sass": "^6.0.1",
-    "sass": "^1.38.1"
+    "postcss": "^7.0.36",
+    "sass": "^1.38.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.8"
   },
   "jest": {
     "roots": [
