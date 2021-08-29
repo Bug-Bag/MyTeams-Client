@@ -18,9 +18,13 @@ interface ISignupPageProps {
 }
 
 enum validationError {
-    USERNAME_TOO_SHORT='Username too short',
-    PASSWORD_MISMATCH='Passwords does not match',
-    NOT_AN_EMAIL='Not a valid email address'
+    USERNAME_TOO_SHORT="Username too short",
+    PASSWORD_MISMATCH="Passwords does not match",
+    NOT_AN_EMAIL="Not a valid email address",
+    INVALID_PASSWORD="Not a valid password. A valid password must have at least 8 characters long, include minumum 1 lower-case character, 1 upper-case character, 1 number anmd 1 symbol.",
+    EMPTY_PASSWD="A password must not be empty.",
+    CONFIRM_PASSWD_NOT_EQ="Passwords are not the same.",
+    INVALID_DISPLAY_NAME = "Display name is too Short. Your display name must have at least 5 characters long."
 }
 
 enum Status {
@@ -53,30 +57,20 @@ export const SignupPageFC: React.FC<ISignupPageProps> = (
 
   return (
     <Card className="signUpCard">
-      <CardHeader title="Sign up as a new user"/>
-      <CardContent>
-        <FormControl margin="normal" style={{width: '60%'}}>
-          {status === Status.Running && 'Loading'}
-          {status === Status.Completed && 'Finished !'}
-          {status === Status.Failed && 'Fuck !'}
-          <TextField className="signUpFields" error={validateUsername(username)!=null} helperText={validateUsername(username)} id="usernameTextField" label="Username" value={username} onChange={ (event) => {
-            setUsername(event.target.value);
-          }}/>
-          <TextField id="passwordTextField" label="Password" value={password} onChange={ (event) => {
-            setPassword(event.target.value);
-          }}/>
-          <TextField id="confirmPasswordTextField" label="Confirm Password" value={confirmPassword} onChange={(event) => {
-            setConfirmPassword(event.target.value);
-          }}/>
-          <TextField id="displayNameTextField" label="Display Name" value={displayName} onChange={(event) => {
-            setDisplayName(event.target.value);
-          }}/>
-          <TextField id="emailTextField" error={validateEmail(email)!=null} helperText={validateEmail(email)} label="Email" value={email} onChange={(event) => {
-            setEmail(event.target.value);
-          }}/>
-        </FormControl>
-      </CardContent>
-      <CardContent>
+        <CardHeader title="Sign up as a new user"/>
+        <CardContent>
+          <FormControl margin="normal" style={{width: "60%"}}>
+            {status === Status.Running && "Loading"}
+            {status === Status.Completed && "Finished !"}
+            {status === Status.Failed && "Fuck !"}
+            <TextField className="signUpFields" error={validateUsername(username)!=null} helperText={validateUsername(username)} id="usernameTextField" label="Username" value={username} onChange={ (event) => {setUsername(event.target.value)}}/>
+            <TextField id="passwordTextField" error={validatePassword(password)!=null} helperText={validatePassword(password)} label="Password" value={password} onChange={ (event) => {setPassword(event.target.value)}}/>
+            <TextField id="confirmPasswordTextField" error={validateConfirmPassword(password, confirmPassword) != null} helperText={validateConfirmPassword(password, confirmPassword)} label="Confirm Password" value={confirmPassword} onChange={(event) => {setConfirmPassword(event.target.value)}}/>
+            <TextField id="displayNameTextField" error={validateDisplayName(displayName)!=null} helperText={validateDisplayName(displayName)} label="Display Name" value={displayName} onChange={(event) => {setDisplayName(event.target.value)}}/>
+            <TextField id="emailTextField" error={validateEmail(email)!=null} helperText={validateEmail(email)} label="Email" value={email} onChange={(event) => {setEmail(event.target.value)}}/>
+          </FormControl>
+        </CardContent>
+        <CardContent>
         <Button variant="contained" color="primary" onClick={onRegister}>
             Sign Up
         </Button>
@@ -98,6 +92,30 @@ function validateUsername(username: string): validationError | null {
 function validateEmail(email: string): validationError | null {
   if (email !== '' && !validator.isEmail(email)) {
     return validationError.NOT_AN_EMAIL;
+  }
+  return null;
+}
+
+function validatePassword(password: string): validationError | null {
+  // if (validator.isEmpty(password)) {return validationError.EMPTY_PASSWD;}
+  if (!validator.isEmpty(password) && !validator.isStrongPassword(password)) {
+    return validationError.INVALID_PASSWORD;
+  }
+  return null;
+}
+
+function validateConfirmPassword(password: string, confirmpassword: string): validationError | null {
+  if (!validator.isEmpty(password)) {
+    if (!validator.isEmpty(confirmpassword) && password !== confirmpassword) {
+      return validationError.CONFIRM_PASSWD_NOT_EQ;
+    }
+  }
+  return null;
+}
+
+function validateDisplayName(displayname: string): validationError | null {
+  if (!validator.isEmpty(displayname) && displayname.length < 5) {
+    return validationError.INVALID_DISPLAY_NAME;
   }
   return null;
 }
