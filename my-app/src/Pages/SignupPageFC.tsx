@@ -1,18 +1,17 @@
 import {
-    Button,
+  Button,
   Card,
   CardContent,
   CardHeader,
   FormControl,
   TextField,
-} from "@material-ui/core";
-import * as React from "react";
-import { useState } from "react";
-import ReactDOM from "react-dom";
+} from '@material-ui/core';
+import * as React from 'react';
+import {useState} from 'react';
 import validator from 'validator';
-import { UserRegistrationRequest, UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
-import { RegisterUser } from "../DataLayer/Providers/UserRegistrationProvider";
-import "./SignupPage.css";
+import {UserRegistrationRequest, UserResponse} from '../DataLayer/DataTransferObject/UserRegistration.type';
+import {RegisterUser} from '../DataLayer/Providers/UserRegistrationProvider';
+import './SignupPage.css';
 
 interface ISignupPageProps {
     setIsSignIn: (isSignIn: boolean) => void;
@@ -36,21 +35,25 @@ enum Status {
 }
 
 export const SignupPageFC: React.FC<ISignupPageProps> = (
-  props: ISignupPageProps
+    props: ISignupPageProps,
 ): JSX.Element => {
-  let [username, setUsername] = useState("");
-  let [password, setPassword] = useState("");
-  let [confirmPassword, setConfirmPassword] = useState("");
-  let [displayName, setDisplayName] = useState("");
-  let [email, setEmail] = useState("");
-  let [status, setStatus] = useState(Status.NotStarted)
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState(Status.NotStarted);
 
   const onRegister = (): void => {
     setStatus(Status.Running);
-    const requestBody: UserRegistrationRequest = {username: username, displayName: displayName, password: password, email:email};
+    const requestBody: UserRegistrationRequest = {username: username, displayName: displayName, password: password, email: email};
     const requestPromise = RegisterUser(requestBody);
-    requestPromise.then((res: UserResponse) => { console.log(res); setStatus(Status.Completed)}).catch((err)=>{console.log(err); setStatus(Status.Failed)})
-  }
+    requestPromise.then((res: UserResponse) => {
+      console.log(res); setStatus(Status.Completed); 
+    }).catch((err)=>{
+      console.log(err); setStatus(Status.Failed);
+    });
+  };
 
   return (
     <Card className="signUpCard">
@@ -70,27 +73,27 @@ export const SignupPageFC: React.FC<ISignupPageProps> = (
         <CardContent>
         <Button variant="contained" color="primary" onClick={onRegister}>
             Sign Up
-          </Button>
-        </CardContent>
-        <Button variant="text" color="secondary" onClick={() => {props.setIsSignIn(true)}}>Already have an account? Go to Sign In</Button>
+        </Button>
+      </CardContent>
+      <Button variant="text" color="secondary" onClick={() => {
+        props.setIsSignIn(true);
+      }}>Already have an account? Go to Sign In</Button>
     </Card>
   );
-
-  
 };
 
 function validateUsername(username: string): validationError | null {
-    if (username !== "" && username.length < 3) {
-        return validationError.USERNAME_TOO_SHORT;
-    } 
-    return null;
+  if (username !== '' && username.length < 3) {
+    return validationError.USERNAME_TOO_SHORT;
+  }
+  return null;
 }
 
 function validateEmail(email: string): validationError | null {
-    if (email !== "" && !validator.isEmail(email)) {
-        return validationError.NOT_AN_EMAIL
-    }
-    return null;
+  if (email !== '' && !validator.isEmail(email)) {
+    return validationError.NOT_AN_EMAIL;
+  }
+  return null;
 }
 
 function validatePassword(password: string): validationError | null {

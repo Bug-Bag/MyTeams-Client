@@ -1,14 +1,12 @@
-import React from 'react';
-import './App.css';
-import { AuthPageContainer } from './Pages/AuthPageConainter';
-import { SignupPageFC } from './Pages/SignupPageFC';
+import React from "react";
+import "./App.css";
+import { ChatPage } from "./Pages/ChatPage";
 
 function App() {
   return (
-      <div>
-        <AuthPageContainer />
-      </div>
+    <ChatPage />
   );
 }
+
 
 export default App;
