@@ -8,11 +8,13 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import App from "../App";
+import { useSelector } from "react-redux";
 import { ChatSummaryList } from "../Components/Chats/ChatSummaryList";
 import { IChatSummary } from "../Models/ChatSummary.type";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import "../styles/output.css";
+import { selectUserProfile } from "../Store/loginSlice";
 
 export const ChatPage: React.FC<{}> = () => {
   return (
@@ -27,6 +29,7 @@ export const ChatPage: React.FC<{}> = () => {
 
 const renderTopbar = () => {
   const menuId = 'primary-search-account-menu';
+  const userProfile= useSelector(selectUserProfile);
   return (
     <AppBar>
         <Toolbar>
@@ -38,6 +41,9 @@ const renderTopbar = () => {
               placeholder="Search…" 
               inputProps={{ "aria-label": "search" }}
             />
+          </div>
+          <div> 
+            {userProfile?.displayName}
           </div>
           <IconButton
               className="justify-end"
