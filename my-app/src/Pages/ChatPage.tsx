@@ -15,6 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import "../styles/output.css";
 import { selectUserProfile } from "../Store/loginSlice";
+import { NavBar } from "../Components/NavBar/Navbar";
 
 export const ChatPage: React.FC<{}> = () => {
   return (
@@ -31,32 +32,7 @@ const renderTopbar = () => {
   const menuId = 'primary-search-account-menu';
   const userProfile= useSelector(selectUserProfile);
   return (
-    <AppBar>
-        <Toolbar>
-          <div className="bg-white bg-opacity-25 rounded-md flex flex-row">
-            <div className={""}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…" 
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-          <div> 
-            {userProfile?.displayName}
-          </div>
-          <IconButton
-              className="justify-end"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-        </Toolbar>
-      </AppBar>
+    <NavBar />
   )
 }
 
