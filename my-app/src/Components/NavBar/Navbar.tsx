@@ -1,39 +1,30 @@
 import React from "react";
-import { AppBar, Button, InputBase, Toolbar } from "@material-ui/core";
+import { AppBar, Button, IconButton, InputBase, Toolbar } from "@material-ui/core";
 import "../../styles/output.css";
 import Search from "@material-ui/icons/Search";
+import { UserProfile } from "../../Models/UserProfile.type";
 
-export const NavBar: React.FC = () => {
+export interface INavBarProps {
+  userProfile: UserProfile,
+  isLoggedIn: boolean
+}
+
+export const NavBar: React.FC<INavBarProps> = ({userProfile, isLoggedIn}: INavBarProps) => {
   return (
     <AppBar>
       <Toolbar className="space-x-4">
-        {renderSearchBar()}
-        {renderProfileSection()}
+        {isLoggedIn && userProfile && renderProfileSection(userProfile)}
       </Toolbar>
-      
     </AppBar>
   );
 };
 
-const renderSearchBar = (): JSX.Element => {
-  return (
-    <div className="flex bg-white bg-opacity-25 w-2/5 justify-items-center pl-2 rounded-2">
-      <div className="flex justify-center items-center">
-        <Search />
-      </div>
-      <InputBase
-        placeholder="Search..."
-        inputProps={{ "aria-label": "search" }}
-        className="px-4"
-      />
-    </div>
-  );
-};
 
-const renderProfileSection = (): JSX.Element => {
+
+const renderProfileSection = (userProfile: UserProfile): JSX.Element => {
     return (
         <div className="flex" style={{marginLeft: "auto"}}>
-          <Button className="justify-self-end" color="inherit">Login</Button>
+          <IconButton edge="end" aria-label="account of the current user" aria-controls={"test"} aria-haspopup color="inherit" />
         </div>
     )
 }
