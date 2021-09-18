@@ -56,7 +56,8 @@ export const SignupPageFC: React.FC<ISignupPageProps> = (
   };
 
   return (
-    <Card className="signUpCard">
+    <div className="flex h-screen">
+      <Card className="signUpCard m-auto">
         <CardHeader title="Sign up as a new user"/>
         <CardContent>
           <FormControl margin="normal" style={{width: "60%"}}>
@@ -79,6 +80,8 @@ export const SignupPageFC: React.FC<ISignupPageProps> = (
         props.setIsSignIn(true);
       }}>Already have an account? Go to Sign In</Button>
     </Card>
+    </div>
+    
   );
 };
 

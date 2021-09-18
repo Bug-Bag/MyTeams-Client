@@ -2,30 +2,30 @@ import { Divider, List, ListItem, makeStyles, Paper } from "@material-ui/core";
 import React from "react";
 import { IChatSummary } from "../../Models/ChatSummary.type";
 import { ChatSummary } from "./ChatSummary";
-import styles from "./ChatSummaryList.module.sass";
 
 interface IProps {
   summaries: IChatSummary[];
+  className?: string;
 }
 
 export const ChatSummaryList: React.FC<IProps> = ({
   summaries,
+  className
 }): JSX.Element => {
   return (
-      <List>{mapSummariesToListItem(summaries)}</List>
+      <List className={className}>{mapSummariesToListItem(summaries)}</List>
   );
 };
 
 const mapSummariesToListItem = (summaries: IChatSummary[]) => {
   return summaries.map((summary, index) => (
-    <div key={`ChatHistory-${index}`}>
+    <ListItem key={`ChatHistory-${index}`} divider alignItems="center">
       <ChatSummary
         userDisplayName={summary.userDisplayName}
         messageDateTime={summary.messageDateTime}
         showTime={summary.showTime}
         content={summary.message}
       />
-      {index < summaries.length - 1 && <Divider />}
-    </div>
+    </ListItem>
   ));
 };

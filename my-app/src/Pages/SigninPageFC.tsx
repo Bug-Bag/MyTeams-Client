@@ -14,7 +14,6 @@ import { loginUser } from "../ActionCreators.ts/LoginActionCreators";
 import { UserLoginRequest } from "../DataLayer/DataTransferObject/UserLogin.type";
 import { UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
 import { LoginUser } from "../DataLayer/Providers/UserLoginProvider";
-import "./SigninPage.css";
 
 interface ISigninPageProps {
   // prop

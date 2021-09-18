@@ -1,8 +1,8 @@
 .signUpCard {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    height: 800px;
+    width: 500px;
+    height: 600px;
     margin: auto;
 }
 
