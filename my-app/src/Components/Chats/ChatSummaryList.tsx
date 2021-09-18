@@ -19,13 +19,11 @@ export const ChatSummaryList: React.FC<IProps> = ({
 
 const mapSummariesToListItem = (summaries: IChatSummary[]) => {
   return summaries.map((summary, index) => (
-    <ListItem key={`ChatHistory-${index}`} divider alignItems="center">
-      <ChatSummary
+      <ChatSummary key={`ChatHistory-${index}`}
         userDisplayName={summary.userDisplayName}
         messageDateTime={summary.messageDateTime}
         showTime={summary.showTime}
         content={summary.message}
       />
-    </ListItem>
   ));
 };

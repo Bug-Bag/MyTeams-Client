@@ -10,16 +10,14 @@ export interface IConversationProps {
 export const Conversation: React.FC<IConversationProps> = ({
   messages,
 }: IConversationProps) => {
-  return <div>{mapToMessages(messages)}</div>;
+  return <div className="grid grid-cols-1">{mapToMessages(messages)}</div>;
 };
 
 const mapToMessages = (messages: IChatMessage[]) => {
   return messages.map((m, index) => {
     return (
-      <div key={`message-${index}`} className="">
-        <div className="w-1/2 ">
-          <ChatMessage {...m}/>
-        </div>
+      <div key={`message-${index}`} style={{justifySelf: m.isSelf? "end" : "start"}}>
+          <ChatMessage {...m} author="testAuthor"/>
       </div>
     );
   });

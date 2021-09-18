@@ -1,22 +1,25 @@
-import { Typography } from "@material-ui/core";
+import { ListItem, Typography } from "@material-ui/core";
 import React from "react";
 
 export interface IChatMessageProps {
-    content: string;
-    time: Date;
-    className?: string
+  content: string;
+  time: Date;
+  isSelf: boolean;
+  className?: string;
+  author: string;
 }
 
 export const ChatMessage = (props: IChatMessageProps) => {
-    return (
-        <div className={`max-w-1/2 p1 flex-column items-end ${props.className}`}>
-            <Typography variant="h6">
-                {props.time.toLocaleDateString()}
-            </Typography>
-            <Typography>
-                {props.content}
-            </Typography>
+  return (
+    <React.Fragment>
+      <div className="flex-row justify-between">
+        <Typography>{props.time.toLocaleTimeString()}</Typography>
+        <Typography>{props.author}</Typography>
+      </div>
 
-        </div>
-    )
-}
+      <div className="bg-gray-100 p-6 rounded-xl max-w-xl">
+        <Typography>{props.content}</Typography>
+      </div>
+    </React.Fragment>
+  );
+};

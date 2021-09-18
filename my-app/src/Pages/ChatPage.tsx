@@ -12,9 +12,7 @@ export const ChatPage: React.FC<{}> = () => {
     <div>
       <PrimaryNavBar />
       <div className="flex">
-        <div
-          className="md:w-1/3 lg:w-1/4 h-screen overflow-y-auto pt-16 chatSummaryList"
-        >
+        <div className="md:w-1/3 lg:w-1/4 h-screen overflow-y-auto pt-16 chatSummaryList">
           <ChatSummaryList summaries={getSampleChatSummary()} />
         </div>
         <div className="md:w-2/3 lg:w-3/4 h-screen overflow-y-auto pt-16">
@@ -33,8 +31,9 @@ export const getSampleChatMessages = () => {
       time: new Date(),
     },
     {
-      content: "Test Chat message",
-      isSelf: true,
+      content:
+        "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
+      isSelf: false,
       time: new Date(),
     },
     {
