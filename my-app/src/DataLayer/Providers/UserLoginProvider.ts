@@ -4,7 +4,7 @@ import {
 } from "../DataTransferObject/UserRegistration.type";
 import { makePOSTRequest } from "./BaseProvider";
 
-const baseUrl = "http://localhost:8180/";
+const baseUrl = "http://localhost:8080/";
 const userLoginEndpoint = "login";
 
 export function LoginUser(
