@@ -2,6 +2,7 @@ import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { receiveNewMessage } from "../../ActionCreators.ts/ChatActionCreators";
 import { IChatMessage } from "../../Models/ChatMessage.type";
+import { IChatMessageSocket } from "../DataTransferObject/ChatMessageSocket.type";
 
 const messageKey = "message";
 const connectKey = "connect";
@@ -18,8 +19,8 @@ export default class SocketConnection {
 
   private onReceiveMessage(msg: string) {
     console.log("Received ", msg);
-    let parsedMsg: IChatMessage = JSON.parse(msg);
-    receiveNewMessage(parsedMsg);
+    let parsedMsg: IChatMessageSocket = JSON.parse(msg);
+    receiveNewMessage(parsedMsg.message);
   }
 
   private initListeners() {
@@ -39,7 +40,7 @@ export default class SocketConnection {
     return SocketConnection.instance;
   }
 
-  public sendChatMessage(chat: IChatMessage) {
+  public sendChatMessage(chat: IChatMessageSocket) {
       this.socket.emit(messageKey, JSON.stringify(chat));
   }
 }

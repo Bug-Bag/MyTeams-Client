@@ -1,13 +1,6 @@
-import {
-  AppBar,
-  Button,
-  IconButton,
-  InputBase,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../Store/loginSlice";
 export const PrimaryNavBar: React.FC = () => {
@@ -31,7 +24,7 @@ export const PrimaryNavBar: React.FC = () => {
               aria-haspopup="true"
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircleIcon />
             </IconButton>
           </div>
         </div>

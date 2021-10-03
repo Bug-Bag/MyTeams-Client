@@ -1,11 +1,5 @@
+import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from "@mui/material";
 import React from "react";
-import {
-  Avatar,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-} from "@material-ui/core";
 import styles from "./ChatSummary.module.sass";
 
 export interface IChatSummaryProps {
