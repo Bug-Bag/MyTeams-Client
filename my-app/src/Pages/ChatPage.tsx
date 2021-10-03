@@ -5,6 +5,8 @@ import "../styles/output.css";
 import { PrimaryNavBar } from "../Components/NavBar/PrimaryNavBar";
 import "./ChatPage.module.scss";
 import { Conversation } from "../Components/Chats/Conversation";
+import { Button } from "@material-ui/core";
+import SocketConnection from "../DataLayer/Socket/SocketConnection";
 
 export const ChatPage: React.FC<{}> = () => {
   return (
@@ -16,6 +18,17 @@ export const ChatPage: React.FC<{}> = () => {
         </div>
         <div className="md:w-2/3 lg:w-3/4 h-screen overflow-y-auto pt-16">
           <Conversation convId="testConv" />
+          <Button variant="outlined" onClick={() => {
+            const socket = SocketConnection.getInstance();
+            console.log("Clicked send");
+            socket.sendChatMessage({
+              convId: "testConv",
+              author: "Zhancheng",
+              isSelf: true,
+              content: "Test broadCast",
+              time: new Date().toISOString()
+            })
+          }}>Test Message</Button>
         </div>
       </div>
     </div>

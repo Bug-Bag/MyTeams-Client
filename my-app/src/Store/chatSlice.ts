@@ -4,7 +4,7 @@ import { IConversation } from "../Models/Conversation.type";
 import { RootState } from "./store";
 
 export interface chatSlice {
-    conversations: Map<string, IConversation>
+    conversations: IConversation[];
 }
 
 const getSampleConversations = () => {
@@ -13,8 +13,8 @@ const getSampleConversations = () => {
         messages: getSampleChatMessages(),
         users: []
     }
-    const sample = new Map<string, IConversation>();
-    sample.set("testConv", conversation);
+    const sample = []
+    sample.push(conversation);
     return sample;
 }
 
@@ -23,9 +23,16 @@ const getSampleChatMessages = () => {
       {
         convId: "test123",
         author: "testUser1",
+        content: "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
+        isSelf: true,
+        time: new Date().toString(),
+      },
+      {
+        convId: "test123",
+        author: "testUser1",
         content: "Test Chat message",
         isSelf: true,
-        time: new Date(),
+        time: new Date().toString(),
       },
       {
         convId: "test123",
@@ -33,58 +40,14 @@ const getSampleChatMessages = () => {
         content:
           "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
         isSelf: false,
-        time: new Date(),
+        time: new Date().toString(),
       },
       {
         convId: "test123",
         author: "testUser1",
         content: "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
         isSelf: true,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content: "Test Chat message",
-        isSelf: true,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content:
-          "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
-        isSelf: false,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content: "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
-        isSelf: true,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content: "Test Chat message",
-        isSelf: true,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content:
-          "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
-        isSelf: false,
-        time: new Date(),
-      },
-      {
-        convId: "test123",
-        author: "testUser1",
-        content: "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
-        isSelf: true,
-        time: new Date(),
+        time: new Date().toString(),
       },
     ];
   
@@ -102,7 +65,7 @@ export const chatSlice = createSlice({
         newMessage: (state, action) => {
             const message: IChatMessage = action.payload as IChatMessage;
             const convId = message.convId;
-            state.conversations.get(convId)?.messages.push(message);
+            state.conversations.find(conv => conv.convId === convId)?.messages.push(message);
         }
     }
 });

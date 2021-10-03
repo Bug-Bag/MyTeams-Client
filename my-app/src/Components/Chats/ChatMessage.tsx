@@ -3,7 +3,7 @@ import React from "react";
 
 export interface IChatMessageProps {
   content: string;
-  time: Date;
+  time: string;
   isSelf: boolean;
   className?: string;
   author: string;
@@ -13,7 +13,7 @@ export const ChatMessage = (props: IChatMessageProps) => {
   return (
     <React.Fragment>
       <div className="flex-row justify-between">
-        <Typography>{props.time.toLocaleTimeString()}</Typography>
+        <Typography>{new Date(props.time).toLocaleTimeString()}</Typography>
         <Typography>{props.author}</Typography>
       </div>
 

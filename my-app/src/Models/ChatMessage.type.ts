@@ -3,5 +3,5 @@ export interface IChatMessage {
     author: string;
     isSelf: boolean;
     content: string;
-    time: Date;
+    time: string;
 }
