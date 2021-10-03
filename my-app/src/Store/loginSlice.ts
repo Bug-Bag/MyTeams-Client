@@ -1,10 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from './store'
-import { UserProfile } from '../Models/UserProfile.type'
-import { STATUS_CODES } from 'http';
+import { IUserProfile } from '../Models/UserProfile.type'
 
 export interface ILoginSlice{
-    currentUser?: UserProfile,
+    currentUser?: IUserProfile,
     isLoggedIn: boolean
 }
 
@@ -19,7 +18,7 @@ export const loginSlice = createSlice({
     reducers: {
         login: (state, action) => { 
             state.isLoggedIn = true;
-            state.currentUser = action.payload as UserProfile
+            state.currentUser = action.payload as IUserProfile
         },
         logout: (state,action) => {
             state.isLoggedIn = false;
@@ -34,3 +33,4 @@ export const selectIsLoggedin = (state: RootState) => state.login.isLoggedIn;
 export const selectUserProfile = (state: RootState) => state.login.currentUser;
 
 export default loginSlice.reducer;
+

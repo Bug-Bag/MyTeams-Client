@@ -1,14 +1,14 @@
 import { UserLoginRequest } from "../DataLayer/DataTransferObject/UserLogin.type";
 import { UserResponse } from "../DataLayer/DataTransferObject/UserRegistration.type";
 import { LoginUser } from "../DataLayer/Providers/UserLoginProvider";
-import { UserProfile } from "../Models/UserProfile.type";
+import { IUserProfile } from "../Models/UserProfile.type";
 import { login } from "../Store/loginSlice";
 import { store } from '../Store/store'
 
 export const loginUser = (userLogin: UserLoginRequest): Promise<UserResponse> => {
     return LoginUser(userLogin, 
         (response: UserResponse) => {
-            const UserProfile: UserProfile = {
+            const UserProfile: IUserProfile = {
                 username: response.username,
                 displayName: response.displayName,
                 email: response.email

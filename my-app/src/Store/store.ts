@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from './loginSlice'
+import chatReducer from './chatSlice'
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -15,7 +16,8 @@ const persistedLoginReducer = persistReducer(persistConfig, loginReducer);
 
 export const store = configureStore({
   reducer: {
-    login: loginReducer   
+    login: loginReducer,
+    chat: chatReducer
   },
 })
 

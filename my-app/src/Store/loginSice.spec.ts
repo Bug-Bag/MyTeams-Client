@@ -1,4 +1,4 @@
-import { UserProfile } from '../Models/UserProfile.type';
+import { IUserProfile } from '../Models/UserProfile.type';
 import { login } from './loginSlice';
 
 import { store } from './store'
@@ -15,7 +15,7 @@ describe('Test login slice', () => {
         expect(initState.isLoggedIn).toEqual(false);
         expect(initState.currentUser).toBe(undefined);
 
-        let testUserProfle: UserProfile = {
+        let testUserProfle: IUserProfile = {
             username: "testUser",
             displayName: "Test User",
             email: "test@test.com"

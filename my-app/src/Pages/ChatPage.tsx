@@ -5,7 +5,6 @@ import "../styles/output.css";
 import { PrimaryNavBar } from "../Components/NavBar/PrimaryNavBar";
 import "./ChatPage.module.scss";
 import { Conversation } from "../Components/Chats/Conversation";
-import { IChatMessage } from "../Models/ChatMessage.type";
 
 export const ChatPage: React.FC<{}> = () => {
   return (
@@ -16,35 +15,14 @@ export const ChatPage: React.FC<{}> = () => {
           <ChatSummaryList summaries={getSampleChatSummary()} />
         </div>
         <div className="md:w-2/3 lg:w-3/4 h-screen overflow-y-auto pt-16">
-          <Conversation messages={getSampleChatMessages()} />
+          <Conversation convId="testConv" />
         </div>
       </div>
     </div>
   );
 };
 
-export const getSampleChatMessages = () => {
-  const testMesssages: IChatMessage[] = [
-    {
-      content: "Test Chat message",
-      isSelf: true,
-      time: new Date(),
-    },
-    {
-      content:
-        "Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message.Test Chat message, this is a super long message",
-      isSelf: false,
-      time: new Date(),
-    },
-    {
-      content: "Test Chat message",
-      isSelf: true,
-      time: new Date(),
-    },
-  ];
 
-  return testMesssages;
-};
 
 export const getSampleChatSummary = () => {
   const testSummaries: IChatSummary[] = [
