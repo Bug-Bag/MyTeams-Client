@@ -16,6 +16,7 @@ describe('Test login slice', () => {
         expect(initState.currentUser).toBe(undefined);
 
         let testUserProfle: IUserProfile = {
+            userId:"testUserId",
             username: "testUser",
             displayName: "Test User",
             email: "test@test.com"

@@ -23,7 +23,7 @@ const mapToMessages = (messages?: IChatMessage[]) => {
   return messages.map((m, index) => {
     return (
       <div key={`message-${index}`} style={{justifySelf: m.isSelf? "end" : "start"}}>
-          <ChatMessage {...m} author="testAuthor"/>
+          <ChatMessage {...m} />
       </div>
     );
   });

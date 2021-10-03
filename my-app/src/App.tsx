@@ -17,8 +17,6 @@ function App() {
   );
 }
 const EntryPoint: React.FC<{}> = () => {
-  // Set up socket io connection 
-  const socket = SocketConnection.getInstance();
   const selectedProfile = useSelector(selectUserProfile);
   const selectedIsLoggedin = useSelector(selectIsLoggedin);
 

@@ -1,4 +1,3 @@
-import { Store } from "redux";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { receiveNewMessage } from "../../ActionCreators.ts/ChatActionCreators";
@@ -8,10 +7,12 @@ const messageKey = "message";
 const connectKey = "connect";
 export default class SocketConnection {
   private socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  private userId: string;
   private static instance: SocketConnection;
 
-  private constructor() {
-    this.socket = io("http://localhost:3111");
+  private constructor(userId: string) {
+    this.userId = userId;
+    this.socket = io("http://localhost:3111", {query: {userId: this.userId}});
     this.initListeners();
   }
 
@@ -31,9 +32,9 @@ export default class SocketConnection {
     });
   }
 
-  public static getInstance(): SocketConnection {
+  public static getInstance(userId: string): SocketConnection {
     if (!SocketConnection.instance) {
-      SocketConnection.instance = new SocketConnection();
+      SocketConnection.instance = new SocketConnection(userId);
     }
     return SocketConnection.instance;
   }

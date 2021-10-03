@@ -7,8 +7,13 @@ import "./ChatPage.module.scss";
 import { Conversation } from "../Components/Chats/Conversation";
 import { Button } from "@material-ui/core";
 import SocketConnection from "../DataLayer/Socket/SocketConnection";
+import { useSelector } from "react-redux";
+import { selectUserProfile } from "../Store/loginSlice";
 
 export const ChatPage: React.FC<{}> = () => {
+  // Set up socket io connection 
+  const userProfile = useSelector(selectUserProfile);
+  const socket = SocketConnection.getInstance(userProfile?.userId || "");
   return (
     <div>
       <PrimaryNavBar />
@@ -19,11 +24,10 @@ export const ChatPage: React.FC<{}> = () => {
         <div className="md:w-2/3 lg:w-3/4 h-screen overflow-y-auto pt-16">
           <Conversation convId="testConv" />
           <Button variant="outlined" onClick={() => {
-            const socket = SocketConnection.getInstance();
             console.log("Clicked send");
             socket.sendChatMessage({
               convId: "testConv",
-              author: "Zhancheng",
+              author: userProfile?.displayName || "unknown",
               isSelf: true,
               content: "Test broadCast",
               time: new Date().toISOString()
