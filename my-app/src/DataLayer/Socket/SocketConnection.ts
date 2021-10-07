@@ -13,7 +13,9 @@ export default class SocketConnection {
 
   private constructor(userId: string) {
     this.userId = userId;
-    this.socket = io("http://localhost:3111", {query: {userId: this.userId}});
+    this.socket = io("http://localhost:3111", {
+      query: { userId: this.userId },
+    });
     this.initListeners();
   }
 
@@ -41,6 +43,6 @@ export default class SocketConnection {
   }
 
   public sendChatMessage(chat: IChatMessageSocket) {
-      this.socket.emit(messageKey, JSON.stringify(chat));
+    this.socket.emit(messageKey, JSON.stringify(chat));
   }
 }

@@ -59,7 +59,7 @@ export const SignInCard: React.FC<SignUpCardProps> = (
       }}
     >
       <Typography variant="h3" component="h3" className="gradient-text">
-        Log in to MyTeams ! 
+        Log in to MyTeams !
       </Typography>
       <FormControl margin="normal" style={{ width: "60%" }}>
         <div className="pt-2">
@@ -92,21 +92,26 @@ export const SignInCard: React.FC<SignUpCardProps> = (
         </div>
       </FormControl>
       <div className="pt-6 flex flex-col">
-          <Button variant="contained" color="primary" className="w-max" onClick={onLogin}>
-            Login
-          </Button>
-        </div>
-        <div className="pt-6">
-          <Button 
-            variant="text"
-            color="primary"
-            onClick={() => {
-              props.setIsSignin(false);
-            }}
-          >
-            Don't have an account? Register a new account now!
-          </Button>
-        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          className="w-max"
+          onClick={onLogin}
+        >
+          Login
+        </Button>
+      </div>
+      <div className="pt-6">
+        <Button
+          variant="text"
+          color="primary"
+          onClick={() => {
+            props.setIsSignin(false);
+          }}
+        >
+          Don't have an account? Register a new account now!
+        </Button>
+      </div>
     </Box>
   );
 };

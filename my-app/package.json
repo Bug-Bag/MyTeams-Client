@@ -137,6 +137,7 @@
     "jest-circus": "^26.6.0",
     "node-sass": "^6.0.1",
     "postcss": "^7.0.36",
+    "prettier": "2.4.1",
     "sass": "^1.38.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.8"
   },
@@ -196,5 +197,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

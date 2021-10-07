@@ -1,4 +1,10 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from "@mui/material";
+import {
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import styles from "./ChatSummary.module.sass";
 

@@ -5,7 +5,7 @@ import { ChatPage } from "./Pages/ChatPage";
 import { store } from "./Store/store";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { selectIsLoggedin, selectUserProfile } from "./Store/loginSlice";
-import io, { Socket } from 'socket.io-client';
+import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import SocketConnection from "./DataLayer/Socket/SocketConnection";
 import { AuthPage } from "./Pages/AuthPage";

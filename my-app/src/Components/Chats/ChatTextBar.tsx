@@ -22,7 +22,12 @@ export const ChatTextBar: React.FC<{}> = (): JSX.Element => {
       className="w-full"
     >
       <Toolbar>
-        <Input value={msgContent} onChange={(event) => {setMsgContent(event.target.value)}}/>
+        <Input
+          value={msgContent}
+          onChange={(event) => {
+            setMsgContent(event.target.value);
+          }}
+        />
         <IconButton
           color="inherit"
           aria-label="send message"

@@ -1,6 +1,6 @@
 export enum Status {
-    Running,
-    Failed,
-    Completed,
-    NotStarted,
-  }
+  Running,
+  Failed,
+  Completed,
+  NotStarted,
+}

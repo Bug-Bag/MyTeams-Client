@@ -1,7 +1,7 @@
 export interface IChatMessage {
-    convId: string;
-    author: string;
-    isSelf: boolean;
-    content: string;
-    time: string;
+  convId: string;
+  author: string;
+  isSelf: boolean;
+  content: string;
+  time: string;
 }
