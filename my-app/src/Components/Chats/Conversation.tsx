@@ -17,7 +17,8 @@ export const Conversation: React.FC<IConversationProps> = ({
   );
   return (
     <div className="grid grid-cols-1">
-      {mapToMessages(conversation?.messages)} <ChatTextBar />
+      {mapToMessages(conversation?.messages)} 
+      <ChatTextBar />
     </div>
   );
 };

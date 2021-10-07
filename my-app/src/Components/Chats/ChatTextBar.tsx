@@ -6,11 +6,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import SocketConnection from "../../DataLayer/Socket/SocketConnection";
 import { selectUserProfile } from "../../Store/loginSlice";
-import { TextField } from "@mui/material";
+import { Input, TextField } from "@mui/material";
 
 export const ChatTextBar: React.FC<{}> = (): JSX.Element => {
   let [content, setContent] = useState("");
   let [isLoading, setIsLoading] = useState(false);
+  let [msgContent, setMsgContent] = useState("");
   const userProfile = useSelector(selectUserProfile);
   const socket = SocketConnection.getInstance(userProfile?.userId || "");
   return (
@@ -21,7 +22,7 @@ export const ChatTextBar: React.FC<{}> = (): JSX.Element => {
       className="w-full"
     >
       <Toolbar>
-        <TextField id="standard-basic" label="Standard" variant="standard" />
+        <Input value={msgContent} onChange={(event) => {setMsgContent(event.target.value)}}/>
         <IconButton
           color="inherit"
           aria-label="send message"
@@ -32,7 +33,7 @@ export const ChatTextBar: React.FC<{}> = (): JSX.Element => {
                 convId: "testConv",
                 author: userProfile?.displayName || "unknown",
                 isSelf: true,
-                content: "Test broadCast",
+                content: msgContent,
                 time: new Date().toISOString(),
               },
               sender: userProfile!,
